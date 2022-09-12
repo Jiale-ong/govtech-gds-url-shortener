@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  ###################################
+  # Url: Url Simple Microservice
+  ###################################
+  url:
+    build:
+      context: ./Backend/url
+      dockerfile: url.Dockerfile
+    image: ongjiale/url:v1.0
+    restart: always
+    environment:
+      # dbURL: mysql://username:password@host:port/database_name
+      dbURL: mysql+mysqlconnector://is213@host.docker.internal:3306/url
+      PYTHONUNBUFFERED: 1
+    ports:
+      - "5001:5001"
+    expose:
+      - "5001"
+
+  ###################################
+  # Controller: Controller Complex Microservice
+  ###################################
+  controller:
+    build:
+      context: ./Backend/controller
+      dockerfile: controller.Dockerfile
+    image: ongjiale/controller:v1.0
+    restart: always
+    depends_on:
+      - url
+    environment:
+      url_api: http://host.docker.internal:5001
+      PYTHONUNBUFFERED: 1
+    ports:
+      - "5002:5002"

@@ -111,6 +111,8 @@ async function create_new_url() {
       body: JSON.stringify(request_body)
     }
   );
+  console.log(response.json())
+
   await getData();
 }
 

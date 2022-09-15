@@ -78,3 +78,11 @@
   // setInterval(countDownDate, 1000);
 
 })()
+
+function set_http(){
+  document.getElementById("http-button").innerText = "http://"
+}
+
+function set_https(){
+  document.getElementById("http-button").innerText = "https://"
+}

@@ -3,23 +3,32 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap demo</title>
+        <title>SingURL</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        <script src="main.js"></script>
     </head>
     <body>
-        <h1>Hello, world!</h1>
+        <div class="page-header">
+            <h1>URL Shortener Application</h1>
+        </div>
 
         <label for="short-url-input" class="form-label">Your shortened URL</label>
         <div class="input-group mb-3">
             <span class="input-group-text" id="short-url-input-addon">http://localhost.com/short/</span>
             <input type="text" class="form-control" id="short-url-input" aria-describedby="short-url-input-addon" placeholder="short-url-here">
         </div>
-        
-        <label for="original-url-input" class="form-label">Your shortened URL</label>
+
+        <label for="original-url-input" class="form-label">Your original URL</label>
         <div class="input-group mb-3">
-            <span class="input-group-text" id="original-url-input-addon">http://</span>
+            <button class="btn btn-outline-secondary dropdown-toggle" id="http-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">http://</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" onclick="set_http()">http://</a></li>
+                <li><a class="dropdown-item" href="#" onclick="set_https()">https://</a></li>
+            </ul>
             <input type="text" class="form-control" id="original-url-input" aria-describedby="original-url-input-addon" placeholder="www.example.com" aria-label="original-url-input">
         </div>
+
+        <button type="submit" class="btn btn-primary">Create shortened url</button>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     </body>

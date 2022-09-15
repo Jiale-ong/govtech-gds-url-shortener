@@ -7,14 +7,18 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
         <script src="main.js"></script>
     </head>
-    <body>
+    <body onload="getData()">
         <div class="page-header">
             <h1>Govtech Prototype URL Shortener Application</h1>
         </div>
 
-        <label for="short-url-input" class="form-label">Your shortened URL</label>
+        <label for="short-url-input" class="form-label">
+            Your shortened URL 
+            <br> 
+            <small class="text-muted">Govtech will automatically assign a random short url if left empty</small> 
+        </label>
         <div class="input-group mb-3">
-            <span class="input-group-text" id="short-url-input-addon">localhost:5002/url/</span>
+            <span class="input-group-text" id="short-url-input-addon">http://localhost:5002/url/</span>
             <input type="text" class="form-control" id="short-url-input" aria-describedby="short-url-input-addon" placeholder="short-url-here">
         </div>
 
@@ -28,14 +32,16 @@
             <input type="text" class="form-control" id="original-url-input" aria-describedby="original-url-input-addon" placeholder="www.example.com" aria-label="original-url-input">
         </div>
 
-        <button type="submit" class="btn btn-primary">Create shortened url</button>
+        <button type="submit" class="btn btn-primary" onclick="create_new_url()">Create shortened url</button>
 
-        <div id="existing-url-header" class="page-header" hidden>
+        <br><br>
+
+        <div id="existing-url-header" class="page-header">
             <p class="h2">Existing URLs</p>
         </div>
 
         <!-- Javascript function will automatically render content in table -->
-        <table id="existing-url-table" class="table table-dark table-striped" onload="getData()" hidden></table>
+        <table id="existing-url-table" class="table table-dark table-striped"></table>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     </body>

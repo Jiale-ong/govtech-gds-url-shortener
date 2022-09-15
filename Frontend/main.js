@@ -88,8 +88,8 @@ function set_https(){
 }
 
 async function create_new_url() {
-  var entered_short_url= document.getElementById("shorturl").value;
-  var entered_url = document.getElementById("url").value;
+  var entered_short_url= document.getElementById("short-url-input").value;
+  var entered_url = document.getElementById("original-url-input").value;
   var entered_url_prefix = document.getElementById("http-button").innerText;
 
   let request_body = {
@@ -108,22 +108,19 @@ async function create_new_url() {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify(request_body)
     }
   );
   await getData();
 }
 
 async function getData() {
-    const response = await fetch("http://localhost:5002/all");
-    const database = await response.json();
-    // console.log(database.data[1].id);
-    const {code, data} = database;
-    // console.log(data[1]);
-    if (data.length > 0){
-      document.getElementById("existing-url-header").setAttribute("hidden",false)
-      document.getElementById("existing-url-table").setAttribute("hidden",false)
-    }
+  console.log("Get data function");
+  const response = await fetch("http://localhost:5002/all");
+  const database = await response.json();
+  // console.log(database.data[1].id);
+  const {code, data} = database;
+  // console.log(data[1]);
 
   var table = document.getElementById("existing-url-table");
 
@@ -139,15 +136,17 @@ async function getData() {
     console.log(data[i].original_url);
 
     current_original_url = data[i]["original_url"];
-    current_shortened_url = "localhost:5002/url/" + data[i]["short_url"];
+    current_shortened_url = document.getElementById("short-url-input-addon").innerText + data[i]["short_url"];
 
     current_html = `
-    <td> 
-      <a href="${current_shortened_url}" class="link-primary">${current_shortened_url}</a> 
-    </td>
-    <td>
-      <a href="${current_original_url}" class="link-secondary">${current_original_url}</a> 
-    </td>
+    <tr>
+      <td> 
+        <a target="_blank" href="${current_shortened_url}" class="link-primary">${current_shortened_url}</a> 
+      </td>
+      <td>
+        <a target="_blank" href="${current_original_url}" class="link-secondary">${current_original_url}</a> 
+      </td>
+    </tr>
     `;
 
     table_html += current_html;

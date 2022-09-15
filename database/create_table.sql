@@ -1,8 +1,8 @@
-CREATE DATABASE IF NOT EXISTS `url` ;
-USE `url`;
+CREATE DATABASE IF NOT EXISTS `govtech_url` ;
+USE `govtech_url`;
 
-DROP TABLE IF EXISTS `url`;
-CREATE TABLE IF NOT EXISTS `url` (
+DROP TABLE IF EXISTS `govtech_url`;
+CREATE TABLE IF NOT EXISTS `govtech_url` (
     `id` int(20) NOT NULL AUTO_INCREMENT,
     `short_url` varchar(150) NOT NULL,
     `original_url` varchar(500) NOT NULL,

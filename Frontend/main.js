@@ -86,3 +86,74 @@ function set_http(){
 function set_https(){
   document.getElementById("http-button").innerText = "https://"
 }
+
+async function create_new_url() {
+  var entered_short_url= document.getElementById("shorturl").value;
+  var entered_url = document.getElementById("url").value;
+  var entered_url_prefix = document.getElementById("http-button").innerText;
+
+  let request_body = {
+    "original_url" : entered_url_prefix + entered_url
+  };
+  
+  if (entered_short_url) {
+    request_body["short_url"] = entered_short_url;
+  }
+  
+
+  let response = await fetch(
+    "http://localhost:5002/new",{
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestBody)
+    }
+  );
+  await getData();
+}
+
+async function getData() {
+    const response = await fetch("http://localhost:5002/all");
+    const database = await response.json();
+    // console.log(database.data[1].id);
+    const {code, data} = database;
+    // console.log(data[1]);
+    if (data.length > 0){
+      document.getElementById("existing-url-header").setAttribute("hidden",false)
+      document.getElementById("existing-url-table").setAttribute("hidden",false)
+    }
+
+  var table = document.getElementById("existing-url-table");
+
+  let table_html = `            
+  <tr>
+    <th>Shortened URL</th>
+    <th>Original URL</th>
+  </tr>
+  `;
+
+  // add json data to table as rows 
+  for (var i = 0; i < data.length; i++){
+    console.log(data[i].original_url);
+
+    current_original_url = data[i]["original_url"];
+    current_shortened_url = "localhost:5002/url/" + data[i]["short_url"];
+
+    current_html = `
+    <td> 
+      <a href="${current_shortened_url}" class="link-primary">${current_shortened_url}</a> 
+    </td>
+    <td>
+      <a href="${current_original_url}" class="link-secondary">${current_original_url}</a> 
+    </td>
+    `;
+
+    table_html += current_html;
+  }
+
+  // update table
+  table.innerHTML = table_html;
+  // console.log(typeof(table))
+}

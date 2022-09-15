@@ -17,7 +17,7 @@ DB_URI = "mysql+mysqlconnector://root:@127.0.0.1:3306/govtech_url"
 
 app = Flask(__name__)
 CORS(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('dbURL') or DB_URI
+app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {'pool_recycle': 299}
 

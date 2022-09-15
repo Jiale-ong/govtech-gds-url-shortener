@@ -13,7 +13,7 @@ import traceback
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 # Proper DB URI: mysql://username:password@host:port/database_name
-DB_URI = "mysql+mysqlconnector://root:@127.0.0.1:3306/url"
+DB_URI = "mysql+mysqlconnector://root:@127.0.0.1:3306/govtech_url"
 
 app = Flask(__name__)
 CORS(app)
@@ -25,7 +25,7 @@ db = SQLAlchemy(app)
 
 # url table mapping
 class Url(db.Model):
-    __tablename__ = 'url'
+    __tablename__ = 'govtech_url'
 
     id = db.Column(db.Integer, autoincrement="auto", primary_key=True)
     short_url = db.Column(db.String(150), nullable=False)

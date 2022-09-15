@@ -35,7 +35,7 @@ def fetch_by_short_url(short_url):
             url_api = url_base + "/db/" + short_url
             json_response = call_api(url=url_api, method="GET")
             print(json_response)
-            original_url = "http://" + json_response["data"]["original_url"]
+            original_url = json_response["data"]["original_url"]
 
             return redirect(original_url, code=302)
         else:
